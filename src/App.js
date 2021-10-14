@@ -6,6 +6,7 @@ import StatioForm from './components/StationForm';
 import Station from './components/Station';
 import Calculate from './components/Calculate';
 import Response from './components/Response';
+import './App.css'
 
 const App = () => {
   const [points, setPoints] = useState([]);
@@ -50,6 +51,9 @@ const App = () => {
   };
 
   const handleCalculation = () => {
+
+    setResponses([]);
+
     const distanceCalculator = (pointA, pointB) => {
       const base = pointA[0] - pointB[0];
       const height = pointA[1] - pointB[1];
@@ -68,6 +72,7 @@ const App = () => {
       }
     };
 
+    console.log('Points', points);
     points.forEach((points) => {
       let previousPower = 0;
       let bestStation = [0, 0];
@@ -93,15 +98,15 @@ const App = () => {
           )
         );
       }
-
-      console.log('Response:-', responses);
     });
   };
 
   return (
-    <>
+    <div className="container">
+      {console.log('Response:-', responses)}
+
       <Header />
-      <div>
+      <div className="point-box">
         {points.length === 0 && <p>Add new point</p>}
         {points.map((point, i) => (
           <Point
@@ -113,7 +118,7 @@ const App = () => {
         <PointForm addNewPoints={addNewPoints} />
       </div>
 
-      <div>
+      <div className="station-box">
         {stations.length === 0 && <p>Add new Station</p>}
         {stations.map((station, i) => (
           <Station
@@ -129,9 +134,11 @@ const App = () => {
         isActive={points.length > 0 && stations.length > 0}
       />
 
-      {responses &&
-        responses.map((message, i) => <Response key={i} message={message} />)}
-    </>
+      <div className="response-box">
+        {responses &&
+          responses.map((message, i) => <Response key={i} message={message} />)}
+      </div>
+    </div>
   );
 };
 

@@ -1,0 +1,77 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  background-color: rgb(42, 42, 40);
+}
+
+.container {
+  max-width: 40%;
+}
+.header {
+  margin: auto;
+  padding: 10px;
+  color: #fff;
+}
+
+.point-box,
+.station-box {
+  margin: 5px;
+  padding: 5px;
+  background-color: rgb(168, 161, 161);
+}
+
+.point-form,
+.station-form {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.coordinate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.coordinate button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: rgb(112, 43, 43);
+}
+
+.point-form input,
+.station-form input {
+  background: #333745;
+  margin: 5px;
+  color: white;
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.point-form button,
+.station-form button {
+  height: 32px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 5px;
+  padding: 5px;
+  background: #315041;
+}
+
+.calculateBtn {
+width: 100%;
+  height: 50px;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.response-box {
+  background-color: rgb(173, 172, 170);
+  margin: 5px
+}
+
+.response-message {
+  font-size: 24px;
+  color: #fff;
+  margin: 5px;
+}
