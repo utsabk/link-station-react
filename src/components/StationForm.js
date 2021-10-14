@@ -1,7 +1,6 @@
 import React from 'react';
 
-const StationForm = (props) => {
-  const { addNewStation } = props;
+const StationForm = ({ addNewStation }) => {
   return (
     <form onSubmit={addNewStation}>
       <input type="number" name="pointX" placeholder="X coordinate" />

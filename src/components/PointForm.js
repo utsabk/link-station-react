@@ -1,7 +1,6 @@
 import React from 'react';
 
-const PointForm = (props) => {
-  const { addNewPoints } = props;
+const PointForm = ({ addNewPoints }) => {
 
   return (
     <form onSubmit={addNewPoints}>
