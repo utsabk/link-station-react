@@ -5,7 +5,8 @@ body {
 }
 
 .container {
-  max-width: 40%;
+  display: flex;
+  flex-direction: column;
 }
 .header {
   margin: auto;
@@ -15,21 +16,19 @@ body {
 
 .point-box,
 .station-box {
+  width: 50%;
   margin: 5px;
   padding: 5px;
+  align-self: center;
   background-color: rgb(168, 161, 161);
 }
 
 .point-form,
-.station-form {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px;
-}
-
+.station-form,
 .coordinate {
   display: flex;
   justify-content: space-between;
+  padding: 5px;
 }
 
 .coordinate button {
@@ -41,7 +40,7 @@ body {
 
 .point-form input,
 .station-form input {
-  background: #333745;
+  background: #3e3f47;
   margin: 5px;
   color: white;
   flex-grow: 1;
@@ -55,23 +54,26 @@ body {
   font-weight: 500;
   margin: 5px;
   padding: 5px;
-  background: #315041;
+  background: #6f9c7a;
 }
 
 .calculateBtn {
-width: 100%;
+  width: 50%;
+  align-self: center;
   height: 50px;
   font-size: 32px;
   font-weight: 500;
 }
 
 .response-box {
+  width: 50%;
+  align-self: center;
   background-color: rgb(173, 172, 170);
-  margin: 5px
+  margin: 5px;
 }
 
 .response-message {
-  font-size: 24px;
+  font-size: 16px;
   color: #fff;
   margin: 5px;
 }
