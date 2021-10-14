@@ -3,10 +3,11 @@ import React from 'react';
 const Point = ({ coordinates, handleDelete }) => {
   return (
     <>
-      <p>
+      <p> 
+        &bull;
         [{coordinates[0]},{coordinates[1]}]
+        <button onClick={handleDelete}>Delete</button>
       </p>
-      <button onClick={handleDelete}>Delete</button>
     </>
   );
 };

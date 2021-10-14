@@ -3,10 +3,11 @@ import React from 'react';
 const Station = ({ station, handleDelete }) => {
   return (
     <>
-      <p>
+      <p> 
+        &bull;
         [{station[0]},{station[1]},{station[2]}]
+        <button onClick={handleDelete}>Delete</button>
       </p>
-      <button onClick={handleDelete}>Delete</button>
     </>
   );
 };

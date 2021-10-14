@@ -5,13 +5,14 @@ import Point from './components/Point';
 import StatioForm from './components/StationForm';
 import Station from './components/Station';
 import Calculate from './components/Calculate';
+import Response from './components/Response';
 
 const App = () => {
   const [points, setPoints] = useState([]);
 
   const [stations, setStations] = useState([]);
 
-  const [response, setResponse] = useState([]);
+  const [responses, setResponses] = useState([]);
 
   const addNewPoints = (event) => {
     event.preventDefault();
@@ -20,7 +21,8 @@ const App = () => {
 
     setPoints(points.concat([[pointX, pointY]]));
 
-    console.log('Button clicked:', points);
+    event.target.elements.pointX.value = '';
+    event.target.elements.pointY.value = '';
   };
 
   const addNewStation = (event) => {
@@ -30,8 +32,9 @@ const App = () => {
     const reach = event.target.elements.reach.value;
 
     setStations(stations.concat([[pointX, pointY, reach]]));
-
-    console.log('Button clicked:', stations);
+    event.target.elements.pointX.value = '';
+    event.target.elements.pointY.value = '';
+    event.target.elements.reach.value = '';
   };
 
   const handlePointDelete = (pointToDelete) => {
@@ -76,19 +79,22 @@ const App = () => {
           bestStation = linkStation;
         }
       });
+
       if (previousPower === 0) {
-        setResponse(
-          response.concat(
+        setResponses(
+          responses.concat(
             `No link station within reach for point ${points[0]}, ${points[1]}`
           )
         );
       } else {
-        setResponse(
-          response.concat(
+        setResponses(
+          responses.concat(
             `Best link station for point ${points[0]},${points[1]} is ${bestStation[0]},${bestStation[1]} with power ${previousPower}`
           )
         );
       }
+
+      console.log('Response:-', responses);
     });
   };
 
@@ -123,8 +129,8 @@ const App = () => {
         isActive={points.length > 0 && stations.length > 0}
       />
 
-      {response.length > 0 &&
-        response.map((message, i) => <p key={i}>{message}</p>)}
+      {responses &&
+        responses.map((message, i) => <Response key={i} message={message} />)}
     </>
   );
 };
