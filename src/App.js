@@ -4,11 +4,14 @@ import PointForm from './components/PointForm';
 import Point from './components/Point';
 import StatioForm from './components/StationForm';
 import Station from './components/Station';
+import Calculate from './components/Calculate';
 
 const App = () => {
   const [points, setPoints] = useState([]);
 
   const [stations, setStations] = useState([]);
+
+  const [response, setResponse] = useState([]);
 
   const addNewPoints = (event) => {
     event.preventDefault();
@@ -43,14 +46,60 @@ const App = () => {
     setStations(updatedStations);
   };
 
+  const handleCalculation = () => {
+    const distanceCalculator = (pointA, pointB) => {
+      const base = pointA[0] - pointB[0];
+      const height = pointA[1] - pointB[1];
+
+      return Math.sqrt(Math.pow(base, 2) + Math.pow(height, 2));
+    };
+
+    const powerCalculator = (devicePoints, linkStation) => {
+      const [xCoord, yCoord, reach] = linkStation;
+      const linkStationPoints = [xCoord, yCoord];
+      const distance = distanceCalculator(devicePoints, linkStationPoints);
+
+      if (distance > reach) return 0;
+      else {
+        return Math.pow(Math.abs(reach - distance), 2);
+      }
+    };
+
+    points.forEach((points) => {
+      let previousPower = 0;
+      let bestStation = [0, 0];
+
+      stations.forEach((linkStation) => {
+        const power = powerCalculator(points, linkStation);
+        if (power > previousPower) {
+          previousPower = power;
+          bestStation = linkStation;
+        }
+      });
+      if (previousPower === 0) {
+        setResponse(
+          response.concat(
+            `No link station within reach for point ${points[0]}, ${points[1]}`
+          )
+        );
+      } else {
+        setResponse(
+          response.concat(
+            `Best link station for point ${points[0]},${points[1]} is ${bestStation[0]},${bestStation[1]} with power ${previousPower}`
+          )
+        );
+      }
+    });
+  };
+
   return (
     <>
       <Header />
       <div>
         {points.length === 0 && <p>Add new point</p>}
-        {points.map((point) => (
+        {points.map((point, i) => (
           <Point
-            key={point}
+            key={i}
             coordinates={point}
             handleDelete={() => handlePointDelete(point)}
           />
@@ -60,15 +109,22 @@ const App = () => {
 
       <div>
         {stations.length === 0 && <p>Add new Station</p>}
-        {stations.map((station) => (
+        {stations.map((station, i) => (
           <Station
-            key={station}
+            key={i}
             station={station}
             handleDelete={() => handleStationDelete(station)}
           />
         ))}
         <StatioForm addNewStation={addNewStation} />
       </div>
+      <Calculate
+        handleCalculation={handleCalculation}
+        isActive={points.length > 0 && stations.length > 0}
+      />
+
+      {response.length > 0 &&
+        response.map((message, i) => <p key={i}>{message}</p>)}
     </>
   );
 };
